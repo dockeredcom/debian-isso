@@ -16,7 +16,7 @@ RUN set -x && \
     mkdir -p /srv/db && \ 
     apt-get update --yes && \ 
     apt-get upgrade --yes && \ 
-    apt-get install dialog python-pip sqlite3 build-essential procps --yes && \ 
+    apt-get install dialog python-pip sqlite3 build-essential --yes && \ 
     pip install isso && \ 
     echo "[general]"                        >   /etc/isso/isso.conf && \ 
     echo "dbpath = /srv/db/comments.db"     >>  /etc/isso/isso.conf && \ 
@@ -24,6 +24,9 @@ RUN set -x && \
     echo "log-file = /var/log/isso.log"     >>  /etc/isso/isso.conf && \ 
     echo ""                                 >>  /etc/isso/isso.conf && \ 
     echo "[server]"                         >>  /etc/isso/isso.conf && \ 
-    echo "listen = $ISSO_LISTEN"            >>  /etc/isso/isso.conf
+    echo "listen = $ISSO_LISTEN"            >>  /etc/isso/isso.conf && \ 
+    apt-get autoremove --yes && \ 
+    apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENTRYPOINT ["/srv/script/start.sh"]
