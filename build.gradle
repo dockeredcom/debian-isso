@@ -1,0 +1,18 @@
+/*
+*
+*   Version 1.0.0
+*
+ */
+
+apply from: "idea.gradle"
+apply from: "docker.gradle"
+
+ext.docker = [
+        repository: "dockeredcom",
+        image: "debian-isso",
+        container: "isso1",
+        ports: ["8080:8080"],
+        run: "/bin/bash"
+]
+
+project.ext.initDirectories()
